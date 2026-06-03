@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<title>Adilio Pizza — Documento de Entrega</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --red: #E8341C;
+  --red-light: #ff6b4a;
+  --dark: #0A0A0A;
+  --dark2: #111;
+  --text: #1a1a1a;
+  --muted: #666;
+  --border: #e5e7eb;
+  --bg-light: #f9fafb;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: #fff;
+  font-size: 13px;
+  line-height: 1.65;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ══════════════════════════════════════
+   CAPA
+══════════════════════════════════════ */
+.capa {
+  background: var(--dark);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+
+.capa__top {
+  padding: 52px 60px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Círculos decorativos */
+.capa::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,52,28,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.capa::after {
+  content: '';
+  position: absolute;
+  bottom: 80px; left: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,52,28,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.capa__pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,52,28,.15);
+  border: 1px solid rgba(232,52,28,.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: #ff8a75;
+  width: fit-content; margin-bottom: 28px;
+}
+.capa__pill::before {
+  content: '';
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #E8341C;
+  box-shadow: 0 0 8px #E8341C;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; } 50% { opacity:.3; }
+}
+
+.capa__logo-line {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+}
+.capa__logo-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, #E8341C, #ff6b4a);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 8px 24px rgba(232,52,28,.4);
+}
+.capa__logo-name {
+  font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px;
+}
+.capa__logo-tag {
+  font-size: 11px; color: #666; margin-top: 1px;
+}
+
+.capa__title {
+  font-size: 58px; font-weight: 900; line-height: 1.0;
+  letter-spacing: -2px; margin-bottom: 20px;
+  color: #fff;
+}
+.capa__title .accent { color: var(--red); }
+
+.capa__desc {
+  font-size: 16px; color: #888; max-width: 480px;
+  font-weight: 400; line-height: 1.6; margin-bottom: 40px;
+}
+
+.capa__meta {
+  display: flex; gap: 0;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  overflow: hidden;
+  width: fit-content;
+}
+.capa__meta-item {
+  padding: 16px 28px;
+  border-right: 1px solid rgba(255,255,255,.07);
+}
+.capa__meta-item:last-child { border-right: none; }
+.capa__meta-label {
+  font-size: 10px; color: #555; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 4px; font-weight: 600;
+}
+.capa__meta-value {
+  font-size: 14px; color: #e0e0e0; font-weight: 700;
+}
+
+.capa__bottom {
+  padding: 32px 60px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,.02);
+}
+.capa__bottom-left { font-size: 12px; color: #444; }
+.capa__badge-ready {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #fff; padding: 8px 20px; border-radius: 8px;
+  font-size: 12px; font-weight: 800; letter-spacing: .5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(34,197,94,.3);
+}
+
+/* ══════════════════════════════════════
+   PÁGINAS
+══════════════════════════════════════ */
+.page {
+  padding: 52px 60px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.page-break { page-break-before: always; }
+
+/* SEÇÃO */
+.section { margin-bottom: 40px; }
+
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.section-num {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--red); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: #fff;
+}
+.section-title {
+  font-size: 20px; font-weight: 800; color: var(--dark); letter-spacing: -.4px;
+}
+.section-line {
+  height: 2px; background: linear-gradient(to right, var(--red), transparent);
+  margin-bottom: 20px; margin-top: -10px;
+  border-radius: 2px;
+}
+
+.subsection-title {
+  font-size: 11px; font-weight: 800; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 20px 0 10px;
+}
+
+/* ══════════════════════════════════════
+   CREDENCIAIS — DESTAQUE ESPECIAL
+══════════════════════════════════════ */
+.cred-card {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(232,52,28,.2);
+}
+.cred-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--red), var(--red-light));
+}
+.cred-card__header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.cred-card__icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(232,52,28,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.cred-card__title { font-size: 15px; font-weight: 800; color: #fff; }
+.cred-card__sub   { font-size: 11px; color: #666; margin-top: 2px; }
+
+.cred-row {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cred-row__label {
+  font-size: 11px; color: #555; text-transform: uppercase;
+  letter-spacing: .8px; font-weight: 700;
+}
+.cred-row__value {
+  font-family: 'Courier New', monospace;
+  font-size: 16px; font-weight: 800; color: #fff;
+  letter-spacing: 1px;
+}
+.cred-row__value--red { color: var(--red); }
+
+.cred-url {
+  background: rgba(232,52,28,.08);
+  border: 1px solid rgba(232,52,28,.2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-top: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.cred-url__label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: .8px; font-weight: 700; flex-shrink: 0; }
+.cred-url__value { font-family: monospace; font-size: 13px; color: var(--red); font-weight: 700; }
+
+.cred-warning {
+  margin-top: 16px;
+  background: rgba(234,179,8,.07);
+  border: 1px solid rgba(234,179,8,.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 12px; color: #a37b00;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.cred-warning::before { content: '!'; font-weight: 900; flex-shrink: 0; }
+
+/* ══════════════════════════════════════
+   FEATURE CARDS
+══════════════════════════════════════ */
+.features {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;
+}
+.feature-card {
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: .2s;
+}
+.feature-card__icon { font-size: 22px; margin-bottom: 8px; }
+.feature-card__title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.feature-card__desc  { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════════
+   ROLE CARDS
+══════════════════════════════════════ */
+.roles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+
+.role-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.role-card__header {
+  background: var(--dark); color: #fff;
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.role-card__emoji { font-size: 20px; }
+.role-card__name  { font-size: 14px; font-weight: 800; }
+.role-card__tag   { font-size: 10px; color: #666; margin-top: 1px; }
+.role-card__body  { padding: 14px 18px; background: #fff; }
+.role-card__item  {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: 12px; color: #444; padding: 4px 0;
+  border-bottom: 1px solid #f5f5f5;
+  line-height: 1.4;
+}
+.role-card__item:last-child { border-bottom: none; }
+.role-card__item::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0; margin-top: 5px;
+}
+
+/* ══════════════════════════════════════
+   STEPS
+══════════════════════════════════════ */
+.steps { display: flex; flex-direction: column; gap: 10px; margin: 12px 0; }
+
+.step {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--bg-light); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+}
+.step-num {
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: var(--red); color: #fff; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px;
+}
+.step-title { font-weight: 700; font-size: 13px; color: var(--dark); margin-bottom: 3px; }
+.step-desc  { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ══════════════════════════════════════
+   CHECKLIST ASAAS
+══════════════════════════════════════ */
+.checklist {
+  list-style: none;
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.checklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px; color: #333;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-box {
+  width: 20px; height: 20px; border: 2px solid #ddd;
+  border-radius: 5px; flex-shrink: 0; margin-top: 1px;
+  background: #fff;
+}
+.checklist li strong { color: var(--red); }
+
+/* ══════════════════════════════════════
+   INFO BOXES
+══════════════════════════════════════ */
+.box {
+  border-radius: 12px; padding: 16px 20px; margin: 12px 0;
+  font-size: 13px; line-height: 1.6;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.box-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.box--red   { background: #fff5f5; border: 1px solid #ffd5cc; color: #7a2015; }
+.box--blue  { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+.box--green { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
+.box--yellow{ background: #fefce8; border: 1px solid #fde68a; color: #713f12; }
+
+/* ══════════════════════════════════════
+   TABLE
+══════════════════════════════════════ */
+.tbl { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin: 12px 0; }
+.tbl th {
+  background: var(--dark); color: #fff;
+  padding: 11px 14px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .7px; text-align: left;
+}
+.tbl td {
+  padding: 11px 14px; border-bottom: 1px solid var(--border);
+  font-size: 12.5px; vertical-align: middle;
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:nth-child(even) td { background: var(--bg-light); }
+
+/* BADGE */
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
+}
+.badge--green  { background:#dcfce7; color:#15803d; }
+.badge--blue   { background:#dbeafe; color:#1d4ed8; }
+.badge--yellow { background:#fef9c3; color:#a16207; }
+.badge--gray   { background:#f3f4f6; color:#6b7280; }
+
+/* ══════════════════════════════════════
+   DIVIDER
+══════════════════════════════════════ */
+.divider {
+  height: 1px; background: var(--border);
+  margin: 36px 0; border: none;
+}
+
+/* ══════════════════════════════════════
+   BIG URL
+══════════════════════════════════════ */
+.big-url {
+  background: var(--dark); border-radius: 10px;
+  padding: 14px 20px; margin: 8px 0;
+  font-family: monospace; font-size: 15px;
+  font-weight: 800; color: var(--red);
+  letter-spacing: .5px;
+}
+
+/* ══════════════════════════════════════
+   FINAL STATUS CARD
+══════════════════════════════════════ */
+.status-final {
+  background: linear-gradient(135deg, var(--dark) 0%, #1a0805 100%);
+  border-radius: 16px; padding: 36px; text-align: center;
+  border: 1px solid rgba(232,52,28,.2);
+  margin-top: 20px; position: relative; overflow: hidden;
+}
+.status-final::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, var(--red), var(--red-light), var(--red));
+}
+.status-final__emoji { font-size: 48px; margin-bottom: 12px; }
+.status-final__title { font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.status-final__sub   { font-size: 14px; color: #777; margin-bottom: 20px; }
+.status-final__url   {
+  display: inline-block;
+  background: rgba(232,52,28,.12);
+  border: 1px solid rgba(232,52,28,.3);
+  border-radius: 8px; padding: 10px 24px;
+  font-size: 16px; font-weight: 800; color: var(--red);
+  font-family: monospace; letter-spacing: .5px;
+}
+
+/* ══════════════════════════════════════
+   FOOTER DE PÁGINA
+══════════════════════════════════════ */
+.doc-footer {
+  background: var(--dark); color: #444;
+  padding: 20px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px;
+}
+.doc-footer strong { color: var(--red); }
+
+/* ══════════════════════════════════════
+   BTN IMPRIMIR
+══════════════════════════════════════ */
+.print-btn {
+  position: fixed; bottom: 28px; right: 28px; z-index: 999;
+  background: var(--red); color: #fff; border: none;
+  padding: 15px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 6px 24px rgba(232,52,28,.45);
+  display: flex; align-items: center; gap: 8px;
+  font-family: inherit;
+}
+.print-btn:hover { background: #c62e18; transform: translateY(-1px); }
+
+@media print {
+  .print-btn { display: none !important; }
+  .capa { min-height: auto; height: 100vh; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     CAPA
+════════════════════════════════════ -->
+<div class="capa">
+  <div class="capa__top">
+    <div class="capa__pill">Sistema entregue e pronto para uso</div>
+
+    <div class="capa__logo-line">
+      <div class="capa__logo-icon">🍕</div>
+      <div>
+        <div class="capa__logo-name">Adilio Pizza</div>
+        <div class="capa__logo-tag">Sistema de Delivery Profissional</div>
+      </div>
+    </div>
+
+    <div class="capa__title">
+      Seu site<br>de delivery<br><span class="accent">está no ar.</span>
+    </div>
+
+    <div class="capa__desc">
+      Este documento contém tudo que você precisa saber para usar o sistema, os dados de acesso e o que ainda precisa configurar para receber pagamentos Pix.
+    </div>
+
+    <div class="capa__meta">
+      <div class="capa__meta-item">
+        <div class="capa__meta-label">Site</div>
+        <div class="capa__meta-value">adiliopizza.com</div>
+      </div>
+      <div class="capa__meta-item">
+        <div class="capa__meta-label">Data de entrega</div>
+        <div class="capa__meta-value">Junho de 2026</div>
+      </div>
+      <div class="capa__meta-item">
+        <div class="capa__meta-label">Desenvolvedor</div>
+        <div class="capa__meta-value">Elton Garcia</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="capa__bottom">
+    <div class="capa__bottom-left">
+      Documento confidencial — uso exclusivo do cliente Adilio Pizza
+    </div>
+    <div class="capa__badge-ready">Sistema Online</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     PÁGINA 1 — ACESSO AO SISTEMA
+════════════════════════════════════ -->
+<div class="page">
+
+  <!-- SEÇÃO: DADOS DE ACESSO -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div class="section-title">Dados de Acesso ao Sistema</div>
+    </div>
+    <div class="section-line"></div>
+
+    <p style="margin-bottom:16px;color:#444;">Guarde estas informações em lugar seguro. São seus dados de administrador — com eles você controla tudo no sistema.</p>
+
+    <!-- Card Admin -->
+    <div class="cred-card">
+      <div class="cred-card__header">
+        <div class="cred-card__icon">🔐</div>
+        <div>
+          <div class="cred-card__title">Painel Administrativo — Acesso Master</div>
+          <div class="cred-card__sub">Acesso total ao sistema — use apenas você</div>
+        </div>
+      </div>
+
+      <div class="cred-row">
+        <div class="cred-row__label">Usuario (login)</div>
+        <div class="cred-row__value">admin</div>
+      </div>
+      <div class="cred-row">
+        <div class="cred-row__label">Senha</div>
+        <div class="cred-row__value cred-row__value--red">fornecida pessoalmente</div>
+      </div>
+
+      <div class="cred-url">
+        <div class="cred-url__label">Endereço do painel</div>
+        <div class="cred-url__value">adiliopizza.com/admin/login.html</div>
+      </div>
+      <div class="cred-url" style="margin-top:8px;">
+        <div class="cred-url__label">Site do cliente</div>
+        <div class="cred-url__value">adiliopizza.com</div>
+      </div>
+
+      <div class="cred-warning">
+        Nao compartilhe a senha com funcionários. Para eles, crie usuários separados em Admin > Usuarios com cargo limitado (garçom, cozinha ou motoboy).
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SEÇÃO: CARGOS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div class="section-title">Perfis de Usuarios da Equipe</div>
+    </div>
+    <div class="section-line"></div>
+
+    <p style="margin-bottom:14px;color:#444;">Cada funcionário tem um perfil com acesso limitado ao que precisa. Você cria eles em <strong>Admin > Usuarios > Novo Usuario</strong>.</p>
+
+    <div class="roles">
+      <div class="role-card">
+        <div class="role-card__header">
+          <div class="role-card__emoji">👨‍💼</div>
+          <div>
+            <div class="role-card__name">Administrador</div>
+            <div class="role-card__tag">Voce — acesso total</div>
+          </div>
+        </div>
+        <div class="role-card__body">
+          <div class="role-card__item">Gerencia pedidos, produtos e configuracoes</div>
+          <div class="role-card__item">Ve relatorios e financeiro</div>
+          <div class="role-card__item">Cria e edita usuarios da equipe</div>
+          <div class="role-card__item">Configura bairros e taxas</div>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-card__header">
+          <div class="role-card__emoji">🍽️</div>
+          <div>
+            <div class="role-card__name">Garcom</div>
+            <div class="role-card__tag">Acesso somente a Mesas</div>
+          </div>
+        </div>
+        <div class="role-card__body">
+          <div class="role-card__item">Abre e fecha mesas</div>
+          <div class="role-card__item">Lanca itens e fecha conta</div>
+          <div class="role-card__item">Nao ve precos nem relatorios</div>
+          <div class="role-card__item">Nao ve configuracoes</div>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-card__header">
+          <div class="role-card__emoji">👨‍🍳</div>
+          <div>
+            <div class="role-card__name">Cozinha</div>
+            <div class="role-card__tag">Acesso somente a KDS</div>
+          </div>
+        </div>
+        <div class="role-card__body">
+          <div class="role-card__item">Ve fila de pedidos para preparar</div>
+          <div class="role-card__item">Marca como "Preparando" e "Pronto"</div>
+          <div class="role-card__item">Nao ve valores nem dados do cliente</div>
+          <div class="role-card__item">Nao ve outras telas</div>
+        </div>
+      </div>
+      <div class="role-card">
+        <div class="role-card__header">
+          <div class="role-card__emoji">🛵</div>
+          <div>
+            <div class="role-card__name">Motoboy</div>
+            <div class="role-card__tag">Acesso somente a Entregas</div>
+          </div>
+        </div>
+        <div class="role-card__body">
+          <div class="role-card__item">Ve as entregas atribuidas a ele</div>
+          <div class="role-card__item">Marca "Saiu" e "Entregue"</div>
+          <div class="role-card__item">Ve endereco e nome do cliente</div>
+          <div class="role-card__item">Nao ve mais nada</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box--blue">
+      <div class="box-icon">💡</div>
+      <div><strong>Dica:</strong> O painel funciona como um aplicativo. No celular, abra o link e toque em "Adicionar a tela inicial" — vai criar um icone igual a um app, sem precisar de Play Store ou App Store.</div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 2 — O QUE O SISTEMA FAZ
+════════════════════════════════════ -->
+<div class="page page-break">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div class="section-title">O que o sistema faz por voce</div>
+    </div>
+    <div class="section-line"></div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-card__icon">📱</div>
+        <div class="feature-card__title">Cardapio Online</div>
+        <div class="feature-card__desc">Cliente ve todas as pizzas com foto, preco e descricao. Funciona perfeitamente no celular, sem precisar instalar nada.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">⚡</div>
+        <div class="feature-card__title">Pix Automatico</div>
+        <div class="feature-card__desc">Cliente paga com QR Code na hora. O dinheiro vai direto para sua conta assim que o pagamento e confirmado.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">💬</div>
+        <div class="feature-card__title">Pedido via WhatsApp</div>
+        <div class="feature-card__desc">Cliente monta o pedido e envia direto para o seu WhatsApp com todos os itens, endereco e forma de pagamento.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">📍</div>
+        <div class="feature-card__title">Rastreio em Tempo Real</div>
+        <div class="feature-card__desc">Cliente acompanha o status do pedido: aguardando, preparando, saiu para entrega, entregue.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">🗂️</div>
+        <div class="feature-card__title">Painel de Pedidos (Kanban)</div>
+        <div class="feature-card__desc">Visualize todos os pedidos organizados por status. Atualize com um clique direto do celular.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">📊</div>
+        <div class="feature-card__title">Relatorios de Vendas</div>
+        <div class="feature-card__desc">Veja o faturamento do dia, semana ou mes. Quais produtos vendem mais e qual horario e mais movimentado.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">🪑</div>
+        <div class="feature-card__title">Gestao de Mesas</div>
+        <div class="feature-card__desc">Garcom abre mesa, lanca itens pelo celular e fecha a conta — tudo sem papel. Ideal para restaurante e salao.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon">🎟️</div>
+        <div class="feature-card__title">Cupons de Desconto</div>
+        <div class="feature-card__desc">Crie cupons com desconto fixo ou percentual para promoçoes, aniversarios e fidelizacao de clientes.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div class="section-title">Como funciona o fluxo de um pedido</div>
+    </div>
+    <div class="section-line"></div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Cliente acessa adiliopizza.com</div>
+          <div class="step-desc">Navega pelo cardapio, escolhe a pizza, o tamanho, a borda e os adicionais. Tudo pelo celular.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Cliente finaliza o pedido</div>
+          <div class="step-desc">Preenche o nome, telefone e endereco. Escolhe entre Pix (pagamento automatico) ou dinheiro/cartao (WhatsApp).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Voce recebe a notificacao</div>
+          <div class="step-desc">Uma notificacao chega no seu celular (se o app admin estiver instalado) e a mensagem aparece no seu WhatsApp.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Atualiza o status no painel</div>
+          <div class="step-desc">Conforme o pedido avanca, voce atualiza: Preparando > Pronto > Saiu para entrega > Entregue. O cliente ve tudo em tempo real.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 3 — CONFIGURAR PIX (ASAAS)
+════════════════════════════════════ -->
+<div class="page page-break">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div class="section-title">Configurar o Pix para receber na sua conta</div>
+    </div>
+    <div class="section-line"></div>
+
+    <div class="box box--yellow">
+      <div class="box-icon">⚠️</div>
+      <div><strong>Importante:</strong> O sistema ja esta funcionando e os clientes ja podem fazer pedidos. Porem, para que o Pix caia direto na sua conta (e nao na conta do desenvolvedor), e necessario configurar o Asaas no seu nome. Veja abaixo o que fazer.</div>
+    </div>
+
+    <div class="subsection-title">O que e o Asaas</div>
+    <p style="margin-bottom:10px;color:#444;">O <strong>Asaas</strong> e um sistema de pagamentos brasileiro que gera o QR Code do Pix automaticamente quando o cliente faz o pedido. O dinheiro vai direto para a sua conta bancaria — sem passar pelo desenvolvedor.</p>
+
+    <div class="box box--green">
+      <div class="box-icon">✓</div>
+      <div>A conta Asaas e <strong>gratuita</strong>. A unica cobrança e uma pequena taxa por transacao Pix (veja em asaas.com as taxas atuais). O sistema em si nao cobra nada adicional.</div>
+    </div>
+
+    <div class="subsection-title">Lista do que preciso que voce me envie</div>
+
+    <ul class="checklist">
+      <li>
+        <div class="check-box"></div>
+        <div>Criar uma conta gratuita em <strong>asaas.com</strong> (pode ser pelo celular, usa seu CPF)</div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div>Confirmar o e-mail e aguardar a <strong>aprovacao da conta</strong> (pode levar horas ou 1 dia)</div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div>Me enviar o seu <strong>CPF</strong> (o mesmo usado no cadastro do Asaas)</div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div>Me enviar a <strong>chave de API de producao</strong> do Asaas (veja como pegar abaixo)</div>
+      </li>
+      <li>
+        <div class="check-box"></div>
+        <div>Confirmar que tem uma <strong>chave Pix cadastrada</strong> dentro do Asaas (CPF, celular ou e-mail)</div>
+      </li>
+    </ul>
+
+    <div class="subsection-title">Como pegar a chave de API no Asaas</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Acesse sua conta no Asaas</div>
+          <div class="step-desc">Entre em asaas.com com seu e-mail e senha.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Va em Configuracoes > Integracoes</div>
+          <div class="step-desc">No menu lateral, procure por "Integracoes" ou "API" dentro das configuracoes da conta.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Clique em "Chaves de API" e gere uma chave</div>
+          <div class="step-desc">Escolha a opcao de producao (nao sandbox). A chave gerada começa com <strong>$aact_prod_...</strong></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Me envie a chave pelo WhatsApp</div>
+          <div class="step-desc">Copie o codigo completo e me manda no WhatsApp com segurança. Com isso, configuro tudo sem voce precisar mexer em mais nada.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box--blue">
+      <div class="box-icon">💡</div>
+      <div><strong>Depois que me mandar:</strong> Eu configuro a chave no sistema, testamos um pedido com valor baixo para confirmar que o Pix esta funcionando e liberamos para os clientes. Todo o processo leva menos de 10 minutos.</div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+
+<!-- ════════════════════════════════════
+     PÁGINA 4 — DIA A DIA + STATUS
+════════════════════════════════════ -->
+<div class="page page-break">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div class="section-title">O que voce pode gerenciar sozinho</div>
+    </div>
+    <div class="section-line"></div>
+
+    <table class="tbl">
+      <thead><tr><th>O que fazer</th><th>Onde fica no painel</th></tr></thead>
+      <tbody>
+        <tr><td>Adicionar ou editar pizzas no cardapio</td><td>Admin > Produtos</td></tr>
+        <tr><td>Pausar um produto temporariamente</td><td>Admin > Produtos > botao Pausar</td></tr>
+        <tr><td>Abrir ou fechar a loja</td><td>Admin > Configuracoes > toggle Loja</td></tr>
+        <tr><td>Adicionar ou remover bairros e taxas de entrega</td><td>Admin > Localidades</td></tr>
+        <tr><td>Criar usuario para garcom, cozinha ou motoboy</td><td>Admin > Usuarios > Novo Usuario</td></tr>
+        <tr><td>Criar cupom de desconto</td><td>Admin > Marketing > Cupons</td></tr>
+        <tr><td>Ver relatorio de vendas do dia/semana/mes</td><td>Admin > Relatorios</td></tr>
+        <tr><td>Gerenciar mesas e comandas</td><td>Admin > Mesas</td></tr>
+        <tr><td>Atualizar horario de funcionamento</td><td>Admin > Configuracoes > Horarios</td></tr>
+        <tr><td>Ver historico do caixa</td><td>Admin > Caixa</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div class="section-title">Status do que foi entregue</div>
+    </div>
+    <div class="section-line"></div>
+
+    <table class="tbl">
+      <thead><tr><th>Funcionalidade</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Site do cliente (cardapio, pedido, rastreio)</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>Painel admin completo</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>WhatsApp automatico com detalhes do pedido</td><td><span class="badge badge--green">Funcionando</span></td></tr>
+        <tr><td>Rastreio de pedido em tempo real</td><td><span class="badge badge--green">Funcionando</span></td></tr>
+        <tr><td>Tela da cozinha (KDS)</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>Tela do motoboy</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>Gestao de mesas e comandas</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>Relatorios de vendas com graficos</td><td><span class="badge badge--green">Pronto e online</span></td></tr>
+        <tr><td>Cupons de desconto</td><td><span class="badge badge--green">Funcionando</span></td></tr>
+        <tr><td>Backup automatico diario</td><td><span class="badge badge--green">Ativo (3h da manha)</span></td></tr>
+        <tr><td>Servidor VPS 24 horas</td><td><span class="badge badge--green">Online</span></td></tr>
+        <tr><td>Pagamento Pix automatico (Asaas)</td><td><span class="badge badge--yellow">Aguardando dados do cliente</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box--blue">
+      <div class="box-icon">📞</div>
+      <div>
+        <strong>Em caso de duvida ou problema, fale comigo:</strong><br>
+        Desenvolvedor: Elton Garcia<br>
+        WhatsApp: (75) 99174-8725
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD FINAL -->
+  <div class="status-final">
+    <div class="status-final__emoji">🍕</div>
+    <div class="status-final__title">Seu site esta no ar!</div>
+    <div class="status-final__sub">Clientes ja podem acessar, ver o cardapio e fazer pedidos agora mesmo.</div>
+    <div class="status-final__url">adiliopizza.com</div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div>Adilio Pizza — Documento de Entrega do Sistema &nbsp;|&nbsp; Junho de 2026</div>
+  <div>Desenvolvido por <strong>Elton Garcia</strong></div>
+</div>
+
+<!-- BOTAO -->
+<button class="print-btn" onclick="window.print()">
+  🖨️ Salvar como PDF
+</button>
+
+</body>
+</html>
